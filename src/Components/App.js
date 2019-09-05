@@ -5,13 +5,16 @@ import Header from "./includes/Header";
 import Sidebar from "./includes/Sidebar";
 import Contents from "./Pages/Contents";
 
-let iteration = 0;
-
 class App extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            active: false,
+            iteration: 0,
+            mess: ''
+        };
 
-    state = {
-        active: false,
-    };
+    }
 
     //Changes the color of the theme when clicked.
     updateData = (color) => {
@@ -22,11 +25,12 @@ class App extends React.Component {
     gettingMess = async () => {
         const api_url = await fetch(`https://baconipsum.com/api/?callback=?`); //Data that I get from the API
         const data = await api_url.json(); //Converting data
-        document.getElementById('messages').innerHTML = data[iteration];//Put in the message
-        if (iteration === 4) {
-            iteration = 0;
-        } else iteration++;
+        if (this.state.iteration === 4) {
+            this.state.iteration = 0;
+        } else this.state.iteration++;
+        this.setState({mess: data[this.state.iteration]});
     };
+
 
     render() {
         let color = this.state.active ? 'white' : 'black'; //current theme color
@@ -36,7 +40,7 @@ class App extends React.Component {
                 <Header/>
                 <Sidebar/>
                 <Contents updateData={this.updateData} color={this.state.active}
-                          gettingMess={this.gettingMess}/>
+                          gettingMess={this.gettingMess} message={this.state.mess}/>
             </div>
             </BrowserRouter>
         );

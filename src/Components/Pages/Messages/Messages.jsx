@@ -2,14 +2,15 @@ import React from 'react';
 
 class Messages extends React.Component {
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.gettingMess();
     }
-
     render() {
         return (
             <div>
-                <p id='messages'/>
+                <p id='messages'>
+                    {this.props.message}
+                </p>
                 <div className='messages'>
                     <button onClick={this.props.gettingMess}>Click me!</button>
                 </div>

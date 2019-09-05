@@ -11,7 +11,7 @@ class Contents extends React.Component{
             <div className='main_app'>
                 <Route exact path="/" render={() => <Main />}/>
                 <Route path="/settings" render={() => <Settings updateData={this.props.updateData} color={this.props.color}/>}/>
-                <Route path="/messages" render={() => <Messages gettingMess={this.props.gettingMess}/>}/>
+                <Route path="/messages" render={() => <Messages gettingMess={this.props.gettingMess} message={this.props.message}/>}/>
             </div>
         );
     }
